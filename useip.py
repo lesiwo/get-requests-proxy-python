@@ -1,15 +1,20 @@
-import getip,testip,requests,json
-
+import getip,testip,requests,json,os
+print(os.getcwd())
 goodIpNum = 0
-ips = "d:/python/爬虫/ips.json"
-goodIps = "d:/python/爬虫/goodips.json"
+ips = "./ips.json"
+goodIps = "./goodips.json"
 def setIpfile(ip,goodip):
     global ips,goodips
     ips = ip
     goodIps = goodip
+    
 
 def ipGet(webpage=None,page=1):
     global ips
+    if not os.path.exists(ips):
+        f = open(ips,"w")
+        f.write("[]")
+        f.close()
     if webpage==None:
         for i in range(1,page+1):
             getip.getIp(i,ips)
@@ -18,8 +23,7 @@ def ipGet(webpage=None,page=1):
 
 def ipTest():
     global goodIpNum,ips,goodIps
-    test = testip.testip()
-    test.main(ips,goodIps)
+    testip.main(ips,goodIps)
     with open(goodIps,"r") as f:
         goodIpNum = len(json.load(fp=f))
 if __name__ =="__main__":
