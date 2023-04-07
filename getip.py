@@ -5,7 +5,7 @@ head = {
 "Accept-Language":"zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2",
 "Accept-Encoding":"gzip, deflate, br"}
 
-def getIp(page="1",ipfile="d:/python/爬虫/ips.json"):
+def getIp(page="1",ipfile="./ips.json"):
     global head
     html = requests.get("https://www.kuaidaili.com/free/inha/"+str(page),headers=head).text
     find = bs4.BeautifulSoup(html,"lxml")
@@ -36,7 +36,7 @@ def getIp(page="1",ipfile="d:/python/爬虫/ips.json"):
     with open(ipfile,"w")as file:
         json.dump(js,fp=file)
 
-def getIpRe(webpage="http://api.89ip.cn/tqdl.html?api=1&num=2921&port=&address=&isp=",ipfile="d:/python/爬虫/ips.json"):
+def getIpRe(webpage="http://api.89ip.cn/tqdl.html?api=1&num=2921&port=&address=&isp=",ipfile="./ips.json"):
 
     global head
     html = requests.get(webpage,headers=head).text
@@ -51,5 +51,5 @@ def getIpRe(webpage="http://api.89ip.cn/tqdl.html?api=1&num=2921&port=&address=&
     with open(ipfile,"w")as file:
         json.dump(js,fp=file)
 
-if __name__ == "__main":
+if __name__ == "__main__":
     getIp()

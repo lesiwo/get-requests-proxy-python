@@ -24,7 +24,7 @@ def test(ip):
         if not html.status_code == 200:
             raise TimeoutError
         
-    except Exception as e:
+    except Exception:
         lock.acquire()
         testOverNum += 1
         percentage =int((testOverNum / all)*100)
@@ -69,5 +69,5 @@ def main(inPut="d:/python/爬虫/ips.json",outPut="d:/python/爬虫/goodips.json
     print("done"+" "*125)
     print("共",len(goodips),"个可用")
 
-if __name__ == "__mian__":
+if __name__ == "__main__":
     main()
