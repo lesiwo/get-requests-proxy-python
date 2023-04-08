@@ -1,5 +1,5 @@
-import getip,testip,requests,json,os
-print(os.getcwd())
+import getip,testip2,requests,json,os,time
+# print(os.getcwd())
 goodIpNum = 0
 ips = "./ips.json"
 goodIps = "./goodips.json"
@@ -18,16 +18,18 @@ def ipGet(webpage=None,page=1):
     if webpage==None:
         for i in range(1,page+1):
             getip.getIp(i,ips)
+            time.sleep(0.7)
+            print("page:",i,end="\r")
     else:
         getip.getIpRe(webpage,ips)
 
 def ipTest():
     global goodIpNum,ips,goodIps
-    testip.main(ips,goodIps)
+    testip2.main(ips,goodIps)
     with open(goodIps,"r") as f:
         goodIpNum = len(json.load(fp=f))
 if __name__ =="__main__":
-    ipGet(page=1)
+    ipGet(webpage="http://api.89ip.cn/tqdl.html?api=1&num=100&port=&address=&isp=",page=30)
     ipTest()
     
     
